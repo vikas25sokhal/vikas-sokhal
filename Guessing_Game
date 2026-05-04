@@ -1,0 +1,84 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    srand(time(0));
+    char playAgain;
+
+    do {
+        int difficulty;
+        int maxNumber, attempts;
+        int guess, secret;
+        int score = 100;
+
+        cout << "\n===== Advanced Number Guessing Game =====\n";
+        cout << "1. Easy   (1 to 20, 7 attempts)\n";
+        cout << "2. Medium (1 to 50, 6 attempts)\n";
+        cout << "3. Hard   (1 to 100, 5 attempts)\n";
+        cout << "Choose difficulty: ";
+        cin >> difficulty;
+
+        switch (difficulty) {
+            case 1:
+                maxNumber = 20;
+                attempts = 7;
+                break;
+            case 2:
+                maxNumber = 50;
+                attempts = 6;
+                break;
+            case 3:
+                maxNumber = 100;
+                attempts = 5;
+                break;
+            default:
+                cout << "Invalid choice! Defaulting to Easy.\n";
+                maxNumber = 20;
+                attempts = 7;
+        }
+
+        secret = rand() % maxNumber + 1;
+
+        cout << "\nI picked a number between 1 and " << maxNumber << ".\n";
+
+        bool guessed = false;
+
+        for (int i = 1; i <= attempts; i++) {
+            cout << "\nAttempt " << i << "/" << attempts << ": ";
+            cin >> guess;
+
+            if (guess == secret) {
+                cout << "Correct! You guessed the number.\n";
+                cout << "Your score: " << score << endl;
+                guessed = true;
+                break;
+            }
+
+            int difference = abs(secret - guess);
+
+            if (guess < secret)
+                cout << "Too low.\n";
+            else
+                cout << "Too high.\n";
+
+            if (difference <= 3)
+                cout << "Very close!\n";
+
+            score -= 15;
+        }
+
+        if (!guessed) {
+            cout << "\nYou lost. The correct number was " << secret << ".\n";
+        }
+
+        cout << "\nPlay again? (y/n): ";
+        cin >> playAgain;
+
+    } while (playAgain == 'y' || playAgain == 'Y');
+
+    cout << "Thanks for playing!\n";
+
+    return 0;
+}
