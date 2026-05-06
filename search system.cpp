@@ -1,21 +1,36 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-int main() {
-    int ids[5] = {101, 102, 103, 104, 105};
-    string names[5] = {"Aman", "Ravi", "Simran", "Karan", "Priya"};
+struct Student {
+    int roll;
+    string name;
+};
 
-    int searchId;
+int main() {
+    Student s[5];
+
+    // Input student data
+    for (int i = 0; i < 5; i++) {
+        cout << "Enter roll number of student " << i + 1 << ": ";
+        cin >> s[i].roll;
+        cout << "Enter name of student " << i + 1 << ": ";
+        cin >> s[i].name;
+    }
+
+    int searchRoll;
     bool found = false;
 
-    cout << "Enter student ID to search: ";
-    cin >> searchId;
+    // Search input
+    cout << "\nEnter roll number to search: ";
+    cin >> searchRoll;
 
+    // Search process
     for (int i = 0; i < 5; i++) {
-        if (ids[i] == searchId) {
-            cout << "\nStudent Found!" << endl;
-            cout << "ID: " << ids[i] << endl;
-            cout << "Name: " << names[i] << endl;
+        if (s[i].roll == searchRoll) {
+            cout << "\nStudent Found!\n";
+            cout << "Roll Number: " << s[i].roll << endl;
+            cout << "Name: " << s[i].name << endl;
             found = true;
             break;
         }
